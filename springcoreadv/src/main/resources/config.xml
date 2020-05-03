@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+
+    <bean class="com.mrig.spring.springadv.autowiring.annotatons.Address"
+          name="address11" p:hNo="2442" p:street="BD Galli" p:city="Bangalore"/>
+    <bean class="com.mrig.spring.springadv.autowiring.annotatons.Address"
+          name="address22" p:hNo="2232" p:street="BD Galli" p:city="Bangalore"/>
+    <!--<bean class="com.mrig.spring.springadv.autowiring.Employee" name="emp" autowire="byType"/>--> <!--Autowiring using byType-->
+    <!--<bean class="com.mrig.spring.springadv.autowiring.Employee" name="emp" autowire="byName"/>--> <!--Autowiring using byName-->
+    <bean class="com.mrig.spring.springadv.autowiring.annotatons.Employee" name="emp" /> <!--Autowiring using constructor-->
+
+    <bean class="com.mrig.spring.springadv.autowiring.hotelmgmt.Reservation"
+          name="resv" p:id="1" p:time="12102435" />
+    <bean class="com.mrig.spring.springadv.autowiring.hotelmgmt.Customer" name="cus" p:name="Rudra"/>
+
+    <util:list list-class="java.util.LinkedList" id="productNames">
+        <value>MAC</value>
+        <value>IPhone</value>
+    </util:list>
+    <bean name="prd" class="com.mrig.spring.springadv.standalone.collections.ProductList" >
+        <property name="products">
+            <ref bean="productNames"/>
+        </property>
+    </bean>
+
+    <util:list list-class="java.util.LinkedList" id="topics">
+        <value>SpringBoot</value>
+        <value>Web Services</value>
+    </util:list>
+
+    <context:component-scan base-package="com.mrig.spring.springadv.stereotype.annotation"/>
+
+    <!--<bean name="dao" class="com.mrig.spring.springadv.inject.interfaces.OrderDAOImpl" />
+    <bean name="dao2" class="com.mrig.spring.springadv.inject.interfaces.OrderDAOImpl2" />
+    <bean name="bo" class="com.mrig.spring.springadv.inject.interfaces.OrderBOImpl">
+        <property name="dao" ref="dao2"/>
+    </bean>-->
+
+    <context:component-scan base-package="com.mrig.spring.springadv.inject.interfaces"/>
+</beans>
